@@ -16,9 +16,9 @@ let humidityCharacteristicId      = CBUUID.init(string: "2A6F")
 
 class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDelegate {
     
-    @IBOutlet weak var temperatureValue: UILabel!
-    @IBOutlet weak var humidityValue: UILabel!
-
+    @IBOutlet weak var temperatureUILabel: UILabel!
+    @IBOutlet weak var humidityUILabel: UILabel!
+    
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         if central.state == CBManagerState.poweredOn {
             central.scanForPeripherals(withServices: nil, options: nil)
@@ -92,6 +92,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
             let int16Temperature = Int16(val[1]) << 8 | Int16(val[0])
             let floatTemperature = toSingleDecimalPlace(n: Float(int16Temperature) / 100);
             print("7. temperature \(floatTemperature)")
+            
                 // if let string = String(bytes: val, encoding: .utf8) {
                 //     print(string)
                 //     tempLabel.text = String(string)
