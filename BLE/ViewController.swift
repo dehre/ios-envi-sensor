@@ -77,8 +77,10 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
     
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         if let val = characteristic.value {
-//            print (val)
-           print ("6. characteristic value \([UInt8](val))")
+           print ("6. characteristic raw value \([UInt8](val))")
+           let int16Temperature = Int16(val[1]) << 8 | Int16(val[0])
+           let floatTemperature = Float(int16Temperature) / 100;
+           print("7. temperature: \(floatTemperature)")
             // if let string = String(bytes: val, encoding: .utf8) {
             //     print(string)
             //     tempLabel.text = String(string)
