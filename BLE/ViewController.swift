@@ -63,25 +63,14 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
         if let chars = service.characteristics {
             for char in chars {
                 print ("5. found characteristic \(char.uuid.uuidString)")
-                // TODO LORIS: no need for 2 different functions here
-                if char.uuid == temperatureCharacteristicId {
-                    checkTemperature(curChar: char)
-                } else if char.uuid == humidityCharacteristicId {
-                    checkHumidity(curChar: char)
-                }
+                pollCharacteristic(char: char)
             }
         }
     }
     
-    func checkTemperature(curChar: CBCharacteristic) {
+    func pollCharacteristic(char: CBCharacteristic) {
         Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { (timer) in
-            self.myPeripheral?.readValue(for: curChar)
-        }
-    }
-
-    func checkHumidity(curChar: CBCharacteristic) {
-        Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { (timer) in
-            self.myPeripheral?.readValue(for: curChar)
+            self.myPeripheral?.readValue(for: char)
         }
     }
 
