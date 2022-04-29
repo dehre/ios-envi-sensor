@@ -9,10 +9,10 @@
 import UIKit
 import CoreBluetooth
 
-let svcThermometer        = CBUUID.init(string: "181A")
-// TODO LORIS: rename characteristicTemperature
-let charThermometerData    = CBUUID.init(string: "2A6E")
-let characteristicHumidity = CBUUID.init(string: "2A6F")
+let peripheralName                = "Envi Sensor"
+let environmentalSensingServiceId = CBUUID.init(string: "181A")
+let temperatureCharacteristicId   = CBUUID.init(string: "2A6E")
+let humidityCharacteristicId      = CBUUID.init(string: "2A6F")
 
 class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDelegate {
     
@@ -26,8 +26,8 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
     }
     
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
-        if peripheral.name?.contains("Envi Sensor") == true {
-            print ("2. envi sensor found, advertisement data: \(advertisementData)")
+        if peripheral.name?.contains(peripheralName) == true {
+            print ("2. found \(peripheralName), advertisement data: \(advertisementData)")
             connect(toPeripheral: peripheral)
         }
     }
@@ -56,7 +56,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
         if let services = peripheral.services {
             for svc in services {
                 print("5. iterating service \(svc.uuid)")
-                if svc.uuid == svcThermometer {
+                if svc.uuid == environmentalSensingServiceId {
                     peripheral.discoverCharacteristics(nil, for: svc)
                 }
             }
@@ -67,7 +67,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
         if let chars = service.characteristics {
             for char in chars {
                 print ("5. found characteristic \(char.uuid.uuidString)")
-                if char.uuid == charThermometerData {
+                if char.uuid == temperatureCharacteristicId {
                     checkTemperature(curChar: char)
                 }
             }
