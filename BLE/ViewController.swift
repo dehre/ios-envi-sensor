@@ -104,6 +104,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        overrideUserInterfaceStyle = .light
         centralManager = CBCentralManager.init(delegate: self, queue: nil)
     }
 }
