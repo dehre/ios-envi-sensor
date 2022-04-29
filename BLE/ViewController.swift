@@ -62,8 +62,11 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
         if let chars = service.characteristics {
             for char in chars {
                 print ("5. found characteristic \(char.uuid.uuidString)")
+                // TODO LORIS: no need for 2 different functions here
                 if char.uuid == temperatureCharacteristicId {
                     checkTemperature(curChar: char)
+                } else if char.uuid == humidityCharacteristicId {
+                    checkHumidity(curChar: char)
                 }
             }
         }
@@ -74,19 +77,40 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
             self.myPeripheral?.readValue(for: curChar)
         }
     }
+
+    func checkHumidity(curChar: CBCharacteristic) {
+        Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { (timer) in
+            self.myPeripheral?.readValue(for: curChar)
+        }
+    }
     
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
-        if let val = characteristic.value {
-           print ("6. characteristic raw value \([UInt8](val))")
-           let int16Temperature = Int16(val[1]) << 8 | Int16(val[0])
-           let floatTemperature = Float(int16Temperature) / 100;
-           print("7. temperature: \(floatTemperature)")
-            // if let string = String(bytes: val, encoding: .utf8) {
-            //     print(string)
-            //     tempLabel.text = String(string)
-            // } else {
-            //     print("not a valid UTF-8 sequence")
-            // }
+        if characteristic.uuid == temperatureCharacteristicId {
+            if let val = characteristic.value {
+            print ("6. temperature raw value \([UInt8](val))")
+            let int16Temperature = Int16(val[1]) << 8 | Int16(val[0])
+            let floatTemperature = Float(int16Temperature) / 100;
+            print("7. temperature \(floatTemperature)")
+                // if let string = String(bytes: val, encoding: .utf8) {
+                //     print(string)
+                //     tempLabel.text = String(string)
+                // } else {
+                //     print("not a valid UTF-8 sequence")
+                // }
+            }
+        } else if characteristic.uuid == humidityCharacteristicId {
+            if let val = characteristic.value {
+                print ("6. humidity raw value \([UInt8](val))")
+                let uint16Humidity = UInt16(val[1]) << 8 | UInt16(val[0])
+                let floatHumidity = Float(uint16Humidity) / 100;
+                print("7. humidity \(floatHumidity)")
+                // if let string = String(bytes: val, encoding: .utf8) {
+                //     print(string)
+                //     tempLabel.text = String(string)
+                // } else {
+                //     print("not a valid UTF-8 sequence")
+                // }
+            }
         }
     }
     
