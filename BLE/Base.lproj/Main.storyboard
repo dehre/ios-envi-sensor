@@ -58,7 +58,8 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
-                        <outlet property="tempLabel" destination="P4P-nO-Wt2" id="Fh2-sT-5oy"/>
+                        <outlet property="humidityValue" destination="uDk-bu-EoN" id="0Te-Xw-pO4"/>
+                        <outlet property="temperatureValue" destination="QZX-DZ-MeV" id="t2g-oZ-0JQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

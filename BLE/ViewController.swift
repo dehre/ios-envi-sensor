@@ -16,8 +16,9 @@ let humidityCharacteristicId      = CBUUID.init(string: "2A6F")
 
 class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDelegate {
     
-    @IBOutlet weak var tempLabel: UILabel!
-    
+    @IBOutlet weak var temperatureValue: UILabel!
+    @IBOutlet weak var humidityValue: UILabel!
+
     func centralManagerDidUpdateState(_ central: CBCentralManager) {
         if central.state == CBManagerState.poweredOn {
             central.scanForPeripherals(withServices: nil, options: nil)
