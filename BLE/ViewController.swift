@@ -83,13 +83,13 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
             self.myPeripheral?.readValue(for: curChar)
         }
     }
-    
+
     func peripheral(_ peripheral: CBPeripheral, didUpdateValueFor characteristic: CBCharacteristic, error: Error?) {
         if characteristic.uuid == temperatureCharacteristicId {
             if let val = characteristic.value {
             print ("6. temperature raw value \([UInt8](val))")
             let int16Temperature = Int16(val[1]) << 8 | Int16(val[0])
-            let floatTemperature = Float(int16Temperature) / 100;
+            let floatTemperature = toSingleDecimalPlace(n: Float(int16Temperature) / 100);
             print("7. temperature \(floatTemperature)")
                 // if let string = String(bytes: val, encoding: .utf8) {
                 //     print(string)
@@ -102,7 +102,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
             if let val = characteristic.value {
                 print ("6. humidity raw value \([UInt8](val))")
                 let uint16Humidity = UInt16(val[1]) << 8 | UInt16(val[0])
-                let floatHumidity = Float(uint16Humidity) / 100;
+                let floatHumidity = toSingleDecimalPlace(n: Float(uint16Humidity) / 100);
                 print("7. humidity \(floatHumidity)")
                 // if let string = String(bytes: val, encoding: .utf8) {
                 //     print(string)
@@ -112,6 +112,10 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
                 // }
             }
         }
+    }
+
+    func toSingleDecimalPlace(n: Float) -> Float {
+        return round(n * 10) / 10
     }
     
     var centralManager : CBCentralManager!
