@@ -39,11 +39,6 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
         myPeripheral = toPeripheral
     }
     
-    // // TODO LORIS: need it?
-    // func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
-    //     central.scanForPeripherals(withServices: nil, options: nil)
-    // }
-    
     func centralManager(_ central: CBCentralManager, didConnect peripheral: CBPeripheral) {
         print ("4. did connect to \(peripheral.name ?? "peripheral")")
         peripheral.discoverServices(nil)
