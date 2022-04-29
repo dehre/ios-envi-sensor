@@ -58,8 +58,8 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
-                        <outlet property="temperatureUILabel" destination="QZX-DZ-MeV" id="4Dx-Ex-CMM"/>
                         <outlet property="humidityUILabel" destination="uDk-bu-EoN" id="y5z-83-wA4"/>
+                        <outlet property="temperatureUILabel" destination="QZX-DZ-MeV" id="4Dx-Ex-CMM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

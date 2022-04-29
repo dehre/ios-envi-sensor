@@ -92,13 +92,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
             let int16Temperature = Int16(val[1]) << 8 | Int16(val[0])
             let floatTemperature = toSingleDecimalPlace(n: Float(int16Temperature) / 100);
             print("7. temperature \(floatTemperature)")
-            
-                // if let string = String(bytes: val, encoding: .utf8) {
-                //     print(string)
-                //     tempLabel.text = String(string)
-                // } else {
-                //     print("not a valid UTF-8 sequence")
-                // }
+            temperatureUILabel.text = "\(floatTemperature)°C"
             }
         } else if characteristic.uuid == humidityCharacteristicId {
             if let val = characteristic.value {
@@ -106,12 +100,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
                 let uint16Humidity = UInt16(val[1]) << 8 | UInt16(val[0])
                 let floatHumidity = toSingleDecimalPlace(n: Float(uint16Humidity) / 100);
                 print("7. humidity \(floatHumidity)")
-                // if let string = String(bytes: val, encoding: .utf8) {
-                //     print(string)
-                //     tempLabel.text = String(string)
-                // } else {
-                //     print("not a valid UTF-8 sequence")
-                // }
+                humidityUILabel.text = "\(floatHumidity) %"
             }
         }
     }
