@@ -2,7 +2,7 @@
 
 A single page iOS application acting as a BLE GATT Client for the [Envi Sensor](https://github.com/dehre/esp32-envi-sensor).
 
-Every 5 seconds, it requests the current temperature and humidity to the ESP32 board and displays them.
+Every 15 seconds, it requests the current temperature and humidity to the ESP32 board and displays them.
 
 ## Disclaimer
 

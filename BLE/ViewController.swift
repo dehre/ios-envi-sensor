@@ -69,7 +69,7 @@ class ViewController: UIViewController, CBCentralManagerDelegate, CBPeripheralDe
     }
     
     func pollCharacteristic(char: CBCharacteristic) {
-        Timer.scheduledTimer(withTimeInterval: 5.0, repeats: true) { (timer) in
+        Timer.scheduledTimer(withTimeInterval: 15.0, repeats: true) { (timer) in
             self.myPeripheral?.readValue(for: char)
         }
     }
