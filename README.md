@@ -15,4 +15,4 @@ I cannot take any credit for this fork, as I'm not an iOS or Swift developer, an
 
 Here's how it looks from the XCode Simulator:
 
-<img src="Assets/simulator-screen-shot.png" width=15% height=15%>
+<img src="Assets/simulator-screen-shot.jpg" width=15% height=15%>
